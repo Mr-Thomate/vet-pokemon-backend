@@ -1,4 +1,6 @@
-import vet_pokemon.vet_backend.dto;
+package vet_pokemon.vet_backend.dto;
+
+import lombok.Data;
 
 @Data
 public class UsuarioDTO {

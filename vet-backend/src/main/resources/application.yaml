@@ -1,3 +1,24 @@
 spring:
   application:
     name: vet-backend
+
+
+spring:
+  datasource:
+    username: ${DB_USERNAME}
+    hikari:
+      maximum-pool-size: '5            # el plan gratis limita conexiones'
+    url: ${DB_URL}
+    password: ${DB_PASSWORD}
+  config:
+    import: 'optional:file:.env[.properties]   # lee el archivo .env'
+  jpa:
+    hibernate:
+      ddl-auto: 'update                    # crea la tabla a partir de la clase Producto'
+    show-sql: 'true'
+server:
+  port: '${PORT:8080}                                # ${X:valor} = usa X; si no existe,
+    usa valor'
+app:
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://localhost:3000,http://localhost:4200}

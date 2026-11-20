@@ -1,4 +1,4 @@
-import vet_pokemon.vet_backend.config;
+package vet_pokemon.vet_backend.config;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
