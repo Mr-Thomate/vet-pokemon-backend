@@ -15,4 +15,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
     // Buscar por rol
     @Query ("SELECT u FROM Usuario u JOIN u.rol r WHERE r.id = :idRol")
     List<Usuario> findByIdRol(@Param ("idRol") Integer idRol);
+
+    boolean existsByCorreoIgnoreCase(String correo)
 }
