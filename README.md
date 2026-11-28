@@ -8,7 +8,7 @@ Stack: Java 21 · Spring Boot · JPA/Hibernate · PostgreSQL (Neon) · Swagger �
 
 ## Ejecutar en local
 
-1. Dentro de `vet-backend/`, copiar `.env.example` como `.env` y completar los datos de Neon.
+1. Dentro de `vet-backend/`, añadir el `.env` enviado al privado y comprobar datos de Neon.
 2. Desde `vet-backend/`: `./mvnw spring-boot:run` (en Windows: `mvnw.cmd spring-boot:run`).
 3. Swagger: http://localhost:8080/swagger-ui/index.html
    Usuarios: http://localhost:8080/api/v1/usuarios
