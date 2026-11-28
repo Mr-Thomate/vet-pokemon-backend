@@ -15,4 +15,6 @@ public interface RolRepository extends JpaRepository<Rol, Integer> {
     // En la entidad el campo se llama nombreRol (antes buscaba r.nombre, que no existe)
     @Query("SELECT r FROM Rol r WHERE r.nombreRol = :nombre")
     List<Rol> findByNombre(@Param("nombre") String nombre);
+    boolean existsByNombreRolIgnoreCase(String nombreRol);
+
 }
