@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="rol")
+@Table(name = "rol")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Rol {
@@ -23,8 +23,8 @@ public class Rol {
     private Integer id;
 
     @NotBlank(message = "El rol debe tener un nombre")
-    @Size(max=20, message= "El nombre del rol no debe superar los 20 caracteres.")
-    @Column(nullable=false, length=20)
+    @Size(max = 20, message = "El nombre del rol no debe superar los 20 caracteres.")
+    @Column(nullable = false, length = 20)
     private String nombreRol;
 
 }

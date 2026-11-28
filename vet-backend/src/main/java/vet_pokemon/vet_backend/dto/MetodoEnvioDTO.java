@@ -1,3 +1,5 @@
+package vet_pokemon.vet_backend.dto;
+
 import java.time.LocalDate;
 
 import lombok.Data;

@@ -2,23 +2,28 @@ spring:
   application:
     name: vet-backend
 
-
-spring:
-  datasource:
-    username: ${DB_USERNAME}
-    hikari:
-      maximum-pool-size: '5            # el plan gratis limita conexiones'
-    url: ${DB_URL}
-    password: ${DB_PASSWORD}
   config:
-    import: 'optional:file:.env[.properties]   # lee el archivo .env'
+    import: "optional:file:.env[.properties]"
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 5      # el plan gratis de Neon limita las conexiones
+      max-lifetime: 240000      # 4 min: Neon apaga conexiones inactivas, así Hikari las renueva antes
+
   jpa:
+    open-in-view: false
     hibernate:
-      ddl-auto: 'update                    # crea la tabla a partir de la clase Producto'
-    show-sql: 'true'
+      ddl-auto: update          # crea/actualiza las tablas a partir de las clases @Entity
+    show-sql: false
+
 server:
-  port: '${PORT:8080}                                # ${X:valor} = usa X; si no existe,
-    usa valor'
+  port: ${PORT:8080}            # Render entrega el puerto en PORT; si no existe, usa 8080
+  forward-headers-strategy: framework   # respeta https cuando está detrás del proxy de Render
+
 app:
   cors:
+    # Orígenes del frontend separados por coma (en Render: variable CORS_ORIGINS con la URL de Vercel)
     allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://localhost:3000,http://localhost:4200}
