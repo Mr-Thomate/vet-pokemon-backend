@@ -57,8 +57,14 @@ public class UsuarioService {
         if(usuario.getFechaNacimiento() != null){
             user.setFechaNacimiento(usuario.getFechaNacimiento());
         }
+        if(usuario.getCorreo() != null){
+            user.setCorreo(usuario.getCorreo());
+        }
         if(usuario.getRol() != null){
             user.setRol(usuario.getRol());
+        }
+        if(usuario.getComuna() != null){
+            user.setComuna(usuario.getComuna());
         }
 
         return usuarioRepository.save(user);
@@ -70,29 +76,32 @@ public class UsuarioService {
 
         dto.setId(user.getId());
 
-        // Manejo de nombre
-        String nombreCompleto = "";
-        try {
-            nombreCompleto = nombreCompleto + user.getPnombre();
-            if (user.getSnombre() != ""){
-                nombreCompleto += " " + user.getSnombre();
-            }
-            nombreCompleto += " " + user.getPapellido();
-            if (user.getSapellido() != ""){
-                nombreCompleto += " " + user.getSapellido();
-            }
-
-        } catch (Exception e) {
-            nombreCompleto = "Invalido";
+        // Manejo de nombre: primer nombre + (segundo nombre) + primer apellido + (segundo apellido)
+        // Los campos opcionales (snombre y sapellido) pueden venir null, por eso se revisan antes de usarlos.
+        String nombreCompleto = user.getPnombre();
+        if (user.getSnombre() != null && !user.getSnombre().isBlank()){
+            nombreCompleto += " " + user.getSnombre();
         }
+        nombreCompleto += " " + user.getPapellido();
+        if (user.getSapellido() != null && !user.getSapellido().isBlank()){
+            nombreCompleto += " " + user.getSapellido();
+        }
+        dto.setNombre(nombreCompleto);
 
         // Manejo de fecha nacimiento
-        String strFecNac = user.getFechaNacimiento().toString();
-        dto.setFechaNacimiento(strFecNac);
+        dto.setFechaNacimiento(user.getFechaNacimiento().toString());
 
-        // Manejo del nombre del rol
-        String nombreRol = user.getRol().getNombreRol();
-        dto.setNombreRol(nombreRol);
+        // Manejo del nombre del rol (el rol puede ser null)
+        if (user.getRol() != null){
+            dto.setNombreRol(user.getRol().getNombreRol());
+        }
+
+        dto.setCorreo(user.getCorreo());
+
+        // Manejo del nombre de la comuna (la comuna puede ser null)
+        if (user.getComuna() != null){
+            dto.setNombrecomuna(user.getComuna().getNombreComuna());
+        }
 
         return dto;
     }

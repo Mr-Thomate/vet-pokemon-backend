@@ -1,56 +1,37 @@
+package vet_pokemon.vet_backend.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name = "MetodoPago")
-public class Pago {
+@Table(name = "metodos_pago")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class MetodoPago {
 
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_MetodoPago;
-    private String descripcion;
-    private Integer Monto_total;
 
-    /*@ManyToOne
-    @JoinColumn(name = "id_comic")
-    private Comic comic;
-
-    @ManyToOne
-    @JoinColumn(name = "id_cliente")
-    private Cliente cliente;
-
-    @ManyToOne
-    @JoinColumn(name = "id_empleado")
-    private Empleado empleado;
-
-
+    @NotBlank(message = "La descripción es obligatoria")
+    @Column(nullable = false, length = 255)
     private String descripcion;
 
-    @NotNull(message = "El Monto total de su compra debe ser obligatorio")
-    @Min(value = 1000, message = "El monto total debe tener un min. de 1000 pesos")
-    @Column(nullable = false)
-    private Integer Monto_total;
+    @NotBlank(message = "El nombre del método de pago es obligatorio")
+    @Column(name = "nombre_metodo_pago", nullable = false, length = 100)
+    private String nombremetodopago;
 
-    @ManyToOne
-    @JoinColumn(name = "id_tienda")
-    private Tienda tienda;
- */   
+    @NotNull(message = "El monto total es obligatorio")
+    @Column(name = "monto_total", nullable = false)
+    private Integer Monto_total;
 }
